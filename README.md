@@ -1,10 +1,18 @@
 # Overview
 
-learning about compilers from the dragon book
+Learning about compilers from the dragon book
 
-GPT4 Baseline Response
+I'll be honest I have no idea how you're supposed to structure C projects, but
+here we go.
+
+```
+cmake -B ./build
+make -C build
+```
 
 ---
+
+GPT4 Baseline Response
 
 1. Front-End:
     - Lexical Analysis (Scanning): Converts the source code into a stream of
