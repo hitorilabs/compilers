@@ -15,8 +15,7 @@ void parse_and_convert() {
         exit(1);
     }
 
-    while (1) {
-        ch = getchar();
+    while ((ch = getchar()) != EOF && ch != '\n') {
         if (ch == '+' || ch == '-') {
             int next_ch = getchar();
             if (isdigit(next_ch)) {
@@ -26,8 +25,6 @@ void parse_and_convert() {
                 fprintf(stderr, "Expected digit after operator\n");
                 exit(1);
             }
-        } else if (ch == EOF || ch == '\n') {
-            break;
         } else {
             fprintf(stderr, "Unexpected character\n");
             exit(1);

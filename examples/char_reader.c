@@ -1,11 +1,9 @@
 #include <stdio.h>
 
 int main(void) {
-    while (1) {
-        char i = getchar();
-        if (i == EOF || i == '\n')
-            break;
-        putchar(i);
+    int ch;
+    while ((ch = getchar()) != EOF && ch != '\n') {
+        putchar(ch);
     }
     putchar('\n');
     return 0;
