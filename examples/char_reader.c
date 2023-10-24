@@ -5,7 +5,7 @@ int main(void) {
         char i = getchar();
         if (i == EOF || i == '\n')
             break;
-        printf("%c", i);
+        putchar(i);
     }
     putchar('\n');
     return 0;
