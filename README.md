@@ -1,99 +1,32 @@
-# Overview
-
-Learning about compilers from the dragon book
-
-I'll be honest I have no idea how you're supposed to structure C projects, but
-here we go.
+# data-structures
+toy implementations of data structures in C++
 
 ```
-cmake -B ./build
-make -C build
+# for google benchmark (usually turn this off)
+BENCHMARK_ENABLE_TESTING=ON
+
+# this project
+BUILD_BENCHMARKS=OFF 
+BUILD_TESTS=OFF 
+
+# for lsp
+CMAKE_EXPORT_COMPILE_COMMANDS=ON
+```
+
+e.g. build with benchmarks on
+```
+cmake -DBUILD_BENCHMARKS=ON -DBENCHMARK_ENABLE_TESTING=OFF -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -B build
 ```
 
 ---
 
-GPT4 Baseline Response
+It's [recommended](https://chromium.googlesource.com/external/github.com/pwnall/googletest/+/refs/tags/release-1.8.0/googletest/docs/FAQ.md#why-is-it-not-recommended-to-install-a-pre_compiled-copy-of-google-test-for-example_into-usr_local) that each project compiles Google Test itself
 
-1. Front-End:
-    - Lexical Analysis (Scanning): Converts the source code into a stream of
-      tokens.
-    - Syntax Analysis (Parsing): Converts the token stream into an abstract
-      syntax tree (AST) or other intermediate representation.
-    - Semantic Analysis: Checks for semantic errors and decorates the AST with
-      additional information, like types.
-    - Efficiency Considerations:
-        - Use efficient data structures.
-        - Optimize the parser and lexer. Tools like Flex and Bison can help
-          generate optimized lexers and parsers.
+See [instructions](https://github.com/google/googletest/blob/main/googletest/README.md) for installing `googletest`
 
-2. Intermediate Representation (IR):
-    - A compiler often translates source code into an intermediate form to make
-      optimization easier.
-    - The IR should be designed to be easy to transform and analyze.
-    - Efficiency Considerations:
-        - Choose an IR that captures the necessary information without being
-          overly verbose.
-        - Use compact in-memory representations.
+Typically you'll clone the `googletest` repo and run something like this:
 
-3. Optimization:
-    - The compiler tries to improve the code without changing its meaning.
-    - Common optimizations include:
-        - Constant folding and propagation.
-        - Dead code elimination.
-        - Loop optimization.
-        - Inlining.
-    - Efficiency Considerations:
-        - Use data-flow analysis and other techniques to efficiently find
-          optimization opportunities.
-        - Implement optimization passes that have a high impact on the
-          generated code's performance.
-
-4. Back-End (Code Generation):
-    - Translates the IR into machine code or another target language.
-    - Efficiency Considerations:
-        - Use efficient algorithms for register allocation.
-        - Implement peephole optimizations to improve the quality of the
-          generated code.
-        - Target-specific optimizations can greatly improve the performance of
-          the generated code.
-
-5. Just-In-Time Compilation (JIT):
-    - Some compilers, especially for dynamic languages, use JIT compilation to
-      translate code at runtime.
-    - Efficiency Considerations:
-        - Use techniques like method caching to avoid recompiling code.
-        - Implement fast code generation strategies that trade off code quality
-          for compilation speed.
-
-6. Parallelism:
-    - Modern compilers can use parallel processing to speed up compilation.
-    - Parts of the compilation process, especially optimization, can be
-      parallelized.
-
-7. Incremental Compilation:
-    - Instead of recompiling everything, only recompile the parts of the code
-      that have changed.
-    - This can greatly speed up the compilation of large projects.
-
-8. Memory Management:
-    - Compilers can be memory-intensive, especially for large projects.
-    - Efficient memory management can speed up the compilation process.
-
-9. Tools and Libraries:
-    - Using well-optimized libraries and tools can help. For instance, using an
-      efficient garbage collector can help with memory management.
-
-What makes a compiler "fast" compared to naive implementations:
-- Efficient Algorithms: Using the best algorithms for each stage of the
-  compilation process.
-- Optimized Data Structures: Efficient storage and quick retrieval of
-  information.
-- Profiling and Benchmarking: Continuously testing the compiler against
-  real-world code and optimizing the hot paths.
-- Avoiding Redundancy: Eliminating unnecessary work, like avoiding re-parsing
-  unchanged code or skipping optimization passes that won't improve the code.
-- Tuned for the Target: Implementing optimizations specific to the target
-  architecture or platform.
-
----
-
+```
+cmake -DBUILD_GMOCK=OFF -B build 
+sudo make -C build install
+```
